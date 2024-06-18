@@ -3,11 +3,12 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const URL = "https://artwork-backend.onrender.com/artworks";
-
+const FAVOURITES_URL = "http://localhost:5005/favourites"
 
 function ArtworkDetail() {
     const { id } = useParams()
     const [artwork, setArtwork] = useState({})
+    const [isFavourite,setIsFavourite] = useState(false)
 
     const getArtworkDetail = async () => {
         try {
@@ -18,9 +19,32 @@ function ArtworkDetail() {
         }
       };
 
+      const checkFavouriteStatus = async () => {
+        try {
+          const res = await axios.get(FAVOURITES_URL+`/${id}`);
+          setIsFavourite(res.data.isFavourite);
+        } catch (error) {
+          console.log(error);
+        }
+      }; 
+
       useEffect(() => {
         getArtworkDetail();
-      }, []);
+        checkFavouriteStatus()
+      }, [id]);
+
+      const toggleFavourite = async () => {
+        try {
+          if (isFavourite) {
+            await axios.delete(FAVOURITES_URL+`/${id}`);
+          } else {
+            await axios.post(FAVOURITES_URL, {isFavourite: true , artworkId: id, id: id, image_id: `${artwork.image_id}` });
+          }
+          setIsFavourite(!isFavourite);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
   return (
 
@@ -33,7 +57,7 @@ function ArtworkDetail() {
             <p>{artwork.date_start} - {artwork.date_end}</p>
             <p>{artwork.artist_display}</p>
             <p>{artwork.description}</p>
-            <button>Like</button>
+            <button onClick={toggleFavourite}>{isFavourite ? 'Unfavourite' : 'Favourite'}</button>
     </div>
   )
 }
