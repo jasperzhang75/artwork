@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const URL = "http://localhost:5005/artworks";
+const URL = "https://artwork-backend.onrender.com/artworks";
 
 
 function ArtworkDetail() {
