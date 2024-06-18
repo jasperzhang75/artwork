@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const FAVOURITES_URL = "http://localhost:5005/favourites";
+const FAVOURITES_URL = "https://artwork-backend.onrender.com/favourites";
 
 function Favourites() {
   const [favourites, setFavourites] = useState([]);

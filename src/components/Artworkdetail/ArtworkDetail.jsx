@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const URL = "https://artwork-backend.onrender.com/artworks";
-const FAVOURITES_URL = "http://localhost:5005/favourites"
+const FAVOURITES_URL = "https://artwork-backend.onrender.com/favourites"
 
 function ArtworkDetail() {
     const { id } = useParams()
