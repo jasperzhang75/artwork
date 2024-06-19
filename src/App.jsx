@@ -1,19 +1,27 @@
 
 import './App.css'
 import Artwork from './components/Artwork/Artwork.jsx'
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Router } from "react-router-dom";
 import ArtworkDetail from './components/Artworkdetail/ArtworkDetail.jsx';
 import Favourites from './components/Favourites/Favourites.jsx';
+import NavBar from './components/Navbar/Navbar.jsx';
+import { useState } from 'react';
 
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Artwork />} />
-        <Route path="/artwork/:id" element={<ArtworkDetail />} />
-        <Route path="/favourites" element={<Favourites />} />
-      </Routes>
+    <NavBar onSearch={handleSearch} />
+    <Routes>
+      <Route path="/" element={<Artwork searchTerm={searchTerm} />} />
+      <Route path="/artwork/:id" element={<ArtworkDetail />} />
+      <Route path="/favourites" element={<Favourites />} />
+    </Routes>
     </>
   )
 }
