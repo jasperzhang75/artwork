@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -13,6 +13,7 @@ function ArtworkDetail() {
   const [comments, setComments] = useState(null);
   const [newComment, setNewComment] = useState("");
   const [editMode, setEditMode] = useState(false);
+  const navigate = useNavigate();
 
   const getArtworkDetail = async () => {
     try {
@@ -89,6 +90,11 @@ function ArtworkDetail() {
     }
   };
 
+  const navigateToArtist = () => {
+    const artistUrl = artwork.artist_title.toLowerCase().split(" ").join("-");
+    navigate(`/artist/${artistUrl}`);
+  };
+
   return (
     <div>
       <img
@@ -99,7 +105,8 @@ function ArtworkDetail() {
       <p>
         {artwork.date_start} - {artwork.date_end}
       </p>
-      <p>{artwork.artist_display}</p>
+      <span onClick={navigateToArtist} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>
+          {artwork.artist_display}</span>
       <p>{artwork.description}</p>
       <button onClick={toggleFavourite}>
         {isFavourite ? "Unfavourite" : "Favourite"}

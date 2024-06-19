@@ -4,9 +4,9 @@ import Artwork from './components/Artwork/Artwork.jsx'
 import { Routes, Route } from "react-router-dom";
 import ArtworkDetail from './components/Artworkdetail/ArtworkDetail.jsx';
 import Favourites from './components/Favourites/Favourites.jsx';
-import Navbar from './components/Navbar/navbar.jsx';
+import Navbar from './components/Navbar/Navbar.jsx';
 import { useState } from 'react';
-
+import ArtistArtworks from './components/ArtistArtworks/ArtistArtworks'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -21,6 +21,7 @@ function App() {
       <Route path="/" element={<Artwork searchTerm={searchTerm} />} />
       <Route path="/artwork/:id" element={<ArtworkDetail />} />
       <Route path="/favourites" element={<Favourites />} />
+      <Route path="/artist/:artistUrl" element={<ArtistArtworks />} />
     </Routes>
     </>
   )
