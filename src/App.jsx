@@ -1,10 +1,10 @@
 
 import './App.css'
 import Artwork from './components/Artwork/Artwork.jsx'
-import { Routes, Route, Router } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import ArtworkDetail from './components/Artworkdetail/ArtworkDetail.jsx';
 import Favourites from './components/Favourites/Favourites.jsx';
-import NavBar from './components/Navbar/Navbar.jsx';
+import Navbar from './components/Navbar/Navbar.jsx';
 import { useState } from 'react';
 
 
@@ -16,7 +16,7 @@ function App() {
   };
   return (
     <>
-    <NavBar onSearch={handleSearch} />
+    <Navbar onSearch={handleSearch} />
     <Routes>
       <Route path="/" element={<Artwork searchTerm={searchTerm} />} />
       <Route path="/artwork/:id" element={<ArtworkDetail />} />
