@@ -4,7 +4,7 @@ import Artwork from './components/Artwork/Artwork.jsx'
 import { Routes, Route } from "react-router-dom";
 import ArtworkDetail from './components/Artworkdetail/ArtworkDetail.jsx';
 import Favourites from './components/Favourites/Favourites.jsx';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar/navbar.jsx';
 import { useState } from 'react';
 
 
