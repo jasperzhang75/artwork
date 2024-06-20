@@ -119,7 +119,7 @@ function ArtworkDetail() {
       </p>
       <span onClick={navigateToArtist} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>
           {artwork.artist_display}</span>
-      <p>{artwork.description}</p>
+      <p dangerouslySetInnerHTML={{__html:artwork.description}}></p>
       <button onClick={toggleFavourite}>
         {isFavourite ? "Unfavourite" : "Favourite"}
       </button>
