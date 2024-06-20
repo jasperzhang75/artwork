@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 
 const URL = "https://artwork-backend.onrender.com/artworks";
 
-function Artwork({ searchTerm }) {
+function Artwork() {
   const [artworks, setArtworks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const getArtwork = async () => {
     try {
@@ -16,16 +17,22 @@ function Artwork({ searchTerm }) {
     }
   };
 
- 
   useEffect(() => {
     getArtwork();
   }, []);
 
- const filteredArtworks = artworks.filter((artwork) =>
-    artwork.artist_display.toLowerCase().includes(searchTerm)
+  const filteredArtworks = artworks.filter((artwork) =>
+    artwork.artist_display.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   return (
     <div>
+      <input
+        type="text"
+        placeholder="Search Artist"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       {filteredArtworks.map((artwork) => (
         <div key={artwork.id}>
           <Link to={`/artwork/${artwork.id}`}>

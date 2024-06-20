@@ -1,0 +1,21 @@
+.artwork-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .artwork-item {
+    text-align: center;
+  }
+  
+  .artwork-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .artwork-item p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+  }
+  

@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "./ArtistArtworks.css";
 
-const ARTIST_API = "https://www.wikiart.org/en/App/Painting/PaintingsByArtist?artistUrl=";
+const ARTIST_API = "https://tastedive-proxy.onrender.com/wikiart?artistUrl=";
 
 function ArtistArtworks() {
   const { artistUrl } = useParams();
@@ -10,7 +11,9 @@ function ArtistArtworks() {
 
   const getArtistArtworks = async () => {
     try {
-      const res = await axios.get(`${ARTIST_API}${artistUrl}&json=2`);
+      const res = await axios.get(
+        `${ARTIST_API}${artistUrl}&json=2&authSessionKey=8bcee2b1e162`
+      );
       setArtworks(res.data);
     } catch (error) {
       console.log(error);
@@ -21,12 +24,23 @@ function ArtistArtworks() {
     getArtistArtworks();
   }, [artistUrl]);
 
+const capitalizeWords = (str) => {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+
+
   return (
     <div>
-      <h1>Artworks by {artistUrl.replace("-", " ")}</h1>
+      <h1>Artworks by {capitalizeWords(artistUrl.replace("-", " "))}</h1>
+      <p>Powered by WikiArt</p>
       <div className="artwork-grid">
         {artworks.map((artwork) => (
-          <img key={artwork.contentId} src={artwork.image} alt={artwork.title} />
+          <div key={artwork.id} className="artwork-item">
+           <Link to={`/artist-artwork/${artwork.contentId}`}>
+              <img src={artwork.image} alt={artwork.title} />
+            </Link>
+            <p>{artwork.yearAsString}</p>
+          </div>
         ))}
       </div>
     </div>

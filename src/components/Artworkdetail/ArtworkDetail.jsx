@@ -1,6 +1,7 @@
 import { useParams, useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { generateArtwork } from "/Users/jasperchang/Artwork/src/services/openServices.js";
 
 const URL = "https://artwork-backend.onrender.com/artworks";
 const FAVOURITES_URL = "https://artwork-backend.onrender.com/favourites";
@@ -13,6 +14,7 @@ function ArtworkDetail() {
   const [comments, setComments] = useState(null);
   const [newComment, setNewComment] = useState("");
   const [editMode, setEditMode] = useState(false);
+  const [generatedArtwork, setGeneratedArtwork] = useState(null);
   const navigate = useNavigate();
 
   const getArtworkDetail = async () => {
@@ -95,6 +97,16 @@ function ArtworkDetail() {
     navigate(`/artist/${artistUrl}`);
   };
 
+  const handleGenerateArtwork = async () => {
+    try {
+      const prompt = `Create a new artwork inspired by ${artwork.title} by ${artwork.artist_display}, created in ${artwork.date_start}.`;
+      const url = await generateArtwork(prompt);
+      setGeneratedArtwork(url);
+    } catch (error) {
+      console.log("Error generating artwork: ", error);
+    }
+  };
+
   return (
     <div>
       <img
@@ -111,6 +123,15 @@ function ArtworkDetail() {
       <button onClick={toggleFavourite}>
         {isFavourite ? "Unfavourite" : "Favourite"}
       </button>
+      <button onClick={handleGenerateArtwork}>
+        Generate Recreation
+      </button>
+      {generatedArtwork && (
+        <div>
+          <h3>Generated Artwork</h3>
+          <img src={generatedArtwork} alt="Generated Artwork" />
+        </div>
+      )}
       <h2>Comment</h2>
       {editMode ? (
         <>

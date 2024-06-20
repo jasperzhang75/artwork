@@ -25,7 +25,7 @@ function Favourites() {
       {favourites.length > 0 ? (
         favourites.map((artwork) => (
           <div key={artwork.id}>
-            <Link to={`/artwork/${artwork.id}`}>
+            <Link to={`/artwork/${artwork.artworkId}`}>
               {" "}
               <img
                 src={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`}
