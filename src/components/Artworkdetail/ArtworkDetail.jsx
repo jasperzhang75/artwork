@@ -1,7 +1,7 @@
 import { useParams, useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { generateArtwork } from "/Users/jasperchang/Artwork/src/services/openServices.js";
+import { generateArtwork } from "./../../services/openServices";
 
 const URL = "https://artwork-backend.onrender.com/artworks";
 const FAVOURITES_URL = "https://artwork-backend.onrender.com/favourites";

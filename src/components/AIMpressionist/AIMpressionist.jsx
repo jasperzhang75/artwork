@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { generateArtwork, generatePoem} from "/Users/jasperchang/Artwork/src/services/openServices.js"; 
+import { generateArtwork, generatePoem } from "./../../services/openServices";
 
 function AIMpressionist() {
-  const [theme, setTheme] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [poem, setPoem] = useState('');
+  const [theme, setTheme] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [poem, setPoem] = useState("");
 
   const handleGenerate = async () => {
     if (theme) {
@@ -17,7 +17,7 @@ function AIMpressionist() {
         const poem = await generatePoem(promptForPoem);
         setPoem(poem);
       } catch (error) {
-        console.error('Error generating content: ', error);
+        console.error("Error generating content: ", error);
       }
     }
   };
