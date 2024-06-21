@@ -24,6 +24,7 @@ function ArtistArtworkDetail() {
 
   return (
     <div>
+      <hr></hr>
     <div className="artist-artwork-detail-container">
       {artwork.image && <img src={artwork.image} alt={artwork.title} />} 
       </div >

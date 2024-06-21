@@ -33,4 +33,10 @@
     font-family: "Merriweather", serif;
 
   }
+
+  hr {
+    color: #ffffff;
+    margin-top: 20px;
+    border: 0.1px solid rgb(210, 210, 210);
+  }
   
