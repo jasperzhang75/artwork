@@ -55,8 +55,8 @@ display: grid;
   text-align: left;
   overflow: hidden;
   background-color: #f2f2f2;
-  transition: transform 0.2s ease-in-out;
-  max-width: 325px;
+  /* max-width: 325px; */
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
 
 .artwork-item:hover {
@@ -67,7 +67,7 @@ display: grid;
   color: #8c8c8c;
 }
 .artwork-item img {
-  width: 325px;
+  width: 100%;
   height: auto;
   display: block;
 }
@@ -76,6 +76,7 @@ display: grid;
   margin: 10px 0;
   font-size: 1rem;
   color: #1c1c1c;
+  transition: color 0.2s ease-in-out;
 }
 
 .artwork-item p:first-child {
