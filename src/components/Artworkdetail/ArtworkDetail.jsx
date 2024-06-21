@@ -1,9 +1,8 @@
-import { useParams, useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { generateArtwork } from "./../../services/openServices";
-import "./ArtworkDetail.css"
-
+import "./ArtworkDetail.css";
 
 const URL = "https://artwork-backend.onrender.com/artworks";
 const FAVOURITES_URL = "https://artwork-backend.onrender.com/favourites";
@@ -13,9 +12,11 @@ function ArtworkDetail() {
   const { id } = useParams();
   const [artwork, setArtwork] = useState({});
   const [isFavourite, setIsFavourite] = useState(false);
+
   const [comments, setComments] = useState(null);
   const [newComment, setNewComment] = useState("");
   const [editMode, setEditMode] = useState(false);
+
   const [generatedArtwork, setGeneratedArtwork] = useState(null);
   const navigate = useNavigate();
 
@@ -41,9 +42,9 @@ function ArtworkDetail() {
   const getComments = async () => {
     try {
       const res = await axios.get(`${COMMENTS_URL}?artworkId=${id}`);
-      console.log(res.data)
-      setComments(res.data[0]||null);
-      console.log(comments)
+      console.log(res.data);
+      setComments(res.data[0] || null);
+      console.log(comments);
     } catch (error) {
       console.log(error);
     }
@@ -85,9 +86,7 @@ function ArtworkDetail() {
           text: newComment,
         });
       }
-      await getComments()
-      //setComments(newComment);
-      // setNewComment("");
+      await getComments();
       setEditMode(false);
     } catch (error) {
       console.log(error);
@@ -101,7 +100,8 @@ function ArtworkDetail() {
 
   const handleGenerateArtwork = async () => {
     try {
-      const prompt = `Create a new artwork inspired by ${artwork.title} by ${artwork.artist_display}, created in ${artwork.date_start}.`;
+      const prompt = `Create a new artwork inspired by ${artwork.title} by 
+      ${artwork.artist_display}, created in ${artwork.date_start}.`;
       const url = await generateArtwork(prompt);
       setGeneratedArtwork(url);
     } catch (error) {
@@ -112,65 +112,68 @@ function ArtworkDetail() {
   return (
     <div>
       <hr></hr>
-    <div className="artwork-detail-container">
-      <div className="artwork-img-container">
-      <img
-        src={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`}
-        alt={artwork.title}
-      /></div>
-       <p className="artwork-title">{artwork.title}</p>
-       <p className="artwork-date">
-        {artwork.date_start} - {artwork.date_end}
-      </p>
-      <span onClick={navigateToArtist} className="artwork-artist">
-          {artwork.artist_display}</span>
-      <p         className="artwork-description"
-dangerouslySetInnerHTML={{__html:artwork.description}}></p>
-      <div className="buttons-container">
-
-      <button onClick={toggleFavourite}>
-        {isFavourite ? "Unfavourite" : "Favourite"}
-      </button>
-      </div>
-      <button onClick={handleGenerateArtwork}>
-        AI-mpressionist It!
-      </button>
-      {generatedArtwork && (
-        <div className="generated-artwork-container">
-          <p>AI-mpressionist Recreation is here!</p>
-          <img src={generatedArtwork} alt="Generated Artwork" />
-        </div>
-      )}
-            <div className="comments-section">
-            <hr></hr>
-
-      <h2>Comment</h2>
-      {editMode ? (
-        <>
-          <input
-            type="text"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Add or edit your comment"
+      <div className="artwork-detail-container">
+        <div className="artwork-img-container">
+          <img
+            src={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`}
+            alt={artwork.title}
           />
-          <button onClick={saveComment}>Save</button>
-          <button onClick={() => setEditMode(false)}>Cancel</button>
-        </>
-      ) : (
-        <>
-<p>{comments ? comments.text : "No comments yet"}</p>
-          <button
-            onClick={() => {
-              setNewComment(comments ? comments.text : "");
-              setEditMode(true);
-            }}
-          >
-            {comments ? "Edit" : "Add a Comment"}
+        </div>
+        <p className="artwork-title">{artwork.title}</p>
+        <p className="artwork-date">
+          {artwork.date_start} - {artwork.date_end}
+        </p>
+        <span onClick={navigateToArtist} className="artwork-artist">
+          {artwork.artist_display}
+        </span>
+        <p
+          className="artwork-description"
+          dangerouslySetInnerHTML={{ __html: artwork.description }}
+        ></p>
+        <div className="buttons-container">
+          <button onClick={toggleFavourite}>
+            {isFavourite ? "Unfavourite" : "Favourite"}
           </button>
-        </>
-      )}
-    </div>
-    </div>
+        </div>
+        <button className="rainbow-button" onClick={handleGenerateArtwork}>
+          AI-mpressionist It!
+        </button>
+        {generatedArtwork && (
+          <div className="generated-artwork-container">
+            <p>AI-mpressionist Recreation is here!</p>
+            <img src={generatedArtwork} alt="Generated Artwork" />
+          </div>
+        )}
+        <div className="comments-section">
+          <hr></hr>
+
+          <h2>Comment</h2>
+          {editMode ? (
+            <>
+              <input
+                type="text"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Add or edit your comment"
+              />
+              <button onClick={saveComment}>Save</button>
+              <button onClick={() => setEditMode(false)}>Cancel</button>
+            </>
+          ) : (
+            <>
+              <p>{comments ? comments.text : "No comments yet"}</p>
+              <button
+                onClick={() => {
+                  setNewComment(comments ? comments.text : "");
+                  setEditMode(true);
+                }}
+              >
+                {comments ? "Edit" : "Add a Comment"}
+              </button>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

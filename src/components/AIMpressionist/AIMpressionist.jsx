@@ -32,7 +32,7 @@ function AIMpressionist() {
           onChange={(e) => setTheme(e.target.value)}
           placeholder="Enter a theme"
         />
-        <button onClick={handleGenerate}>Generate</button>
+        <button onClick={handleGenerate} className="rainbow-button">Generate</button>
       </div>
       <div className="generated-content">
 
