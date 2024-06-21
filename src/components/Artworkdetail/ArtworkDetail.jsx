@@ -2,6 +2,8 @@ import { useParams, useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { generateArtwork } from "./../../services/openServices";
+import "./ArtworkDetail.css"
+
 
 const URL = "https://artwork-backend.onrender.com/artworks";
 const FAVOURITES_URL = "https://artwork-backend.onrender.com/favourites";
@@ -109,29 +111,39 @@ function ArtworkDetail() {
 
   return (
     <div>
+      <hr></hr>
+    <div className="artwork-detail-container">
+      <div className="artwork-img-container">
       <img
         src={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`}
         alt={artwork.title}
-      />
-      <p>{artwork.title}</p>
-      <p>
+      /></div>
+       <p className="artwork-title">{artwork.title}</p>
+       <p className="artwork-date">
         {artwork.date_start} - {artwork.date_end}
       </p>
-      <span onClick={navigateToArtist} style={{ cursor: "pointer", textDecoration: "underline", color: "blue" }}>
+      <span onClick={navigateToArtist} className="artwork-artist">
           {artwork.artist_display}</span>
-      <p dangerouslySetInnerHTML={{__html:artwork.description}}></p>
+      <p         className="artwork-description"
+dangerouslySetInnerHTML={{__html:artwork.description}}></p>
+      <div className="buttons-container">
+
       <button onClick={toggleFavourite}>
         {isFavourite ? "Unfavourite" : "Favourite"}
       </button>
+      </div>
       <button onClick={handleGenerateArtwork}>
-        Generate Recreation
+        AI-mpressionist It!
       </button>
       {generatedArtwork && (
-        <div>
-          <h3>Generated Artwork</h3>
+        <div className="generated-artwork-container">
+          <p>AI-mpressionist Recreation is here!</p>
           <img src={generatedArtwork} alt="Generated Artwork" />
         </div>
       )}
+            <div className="comments-section">
+            <hr></hr>
+
       <h2>Comment</h2>
       {editMode ? (
         <>
@@ -157,6 +169,8 @@ function ArtworkDetail() {
           </button>
         </>
       )}
+    </div>
+    </div>
     </div>
   );
 }

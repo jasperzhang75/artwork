@@ -30,7 +30,7 @@ const capitalizeWords = (str) => {
 
 
   return (
-    <div>
+    <div className="artistartworks-container">
       <h1>Artworks by {capitalizeWords(artistUrl.replace("-", " "))}</h1>
       <p>Powered by WikiArt</p>
       <div className="artwork-grid">
@@ -39,6 +39,7 @@ const capitalizeWords = (str) => {
            <Link to={`/artist-artwork/${artwork.contentId}`}>
               <img src={artwork.image} alt={artwork.title} />
             </Link>
+            <p>{artwork.title}</p>
             <p>{artwork.yearAsString}</p>
           </div>
         ))}

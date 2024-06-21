@@ -34,12 +34,12 @@ export const generatePoem = async (prompt) => {
     const response = await axios.post(
       POEM_API_URL,
       {
-        model: "gpt-4", // Updated model
+        model: "gpt-4",
         messages: [
           { role: "system", content: "You are a poet." },
           { role: "user", content: prompt },
         ],
-        max_tokens: 100,
+        max_tokens: 400,
       },
       {
         headers: {

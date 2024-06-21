@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { generateArtwork, generatePoem } from "./../../services/openServices";
-
+import "./AIMpressionist.css"
 function AIMpressionist() {
   const [theme, setTheme] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -23,30 +23,30 @@ function AIMpressionist() {
   };
 
   return (
-    <div>
-      <h1>AI-mpressionist</h1>
-      <div>
-        <h2>Enter a Theme</h2>
+    <div className="aimpressionist-container">
+      <p>Create Your Impressionism Card!</p>
+      <div className="aimpressionist-input-container">
         <input
           type="text"
           value={theme}
           onChange={(e) => setTheme(e.target.value)}
           placeholder="Enter a theme"
         />
-        <button onClick={handleGenerate}>Generate Image and Poem</button>
+        <button onClick={handleGenerate}>Generate</button>
       </div>
+      <div className="generated-content">
+
       {imageUrl && (
-        <div>
-          <h3>Generated Artwork</h3>
+          <div className="generated-box">
           <img src={imageUrl} alt="Generated Artwork" />
         </div>
       )}
       {poem && (
-        <div>
-          <h3>Generated Poem</h3>
+          <div className="generated-box">
           <p>{poem}</p>
         </div>
       )}
+    </div>
     </div>
   );
 }
