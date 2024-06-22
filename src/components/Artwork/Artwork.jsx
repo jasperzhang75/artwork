@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Artwork.css"
 
-const URL = "https://artwork-backend.onrender.com/artworks";
+const URL = "https://artworkbackend.adaptable.app/artworks";
 
 function Artwork() {
   const [artworks, setArtworks] = useState([]);

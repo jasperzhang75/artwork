@@ -4,9 +4,9 @@ import axios from "axios";
 import { generateArtwork } from "./../../services/openServices";
 import "./ArtworkDetail.css";
 
-const URL = "https://artwork-backend.onrender.com/artworks";
-const FAVOURITES_URL = "https://artwork-backend.onrender.com/favourites";
-const COMMENTS_URL = "https://artwork-backend.onrender.com/comments";
+const URL = "https://artworkbackend.adaptable.app/artworks";
+const FAVOURITES_URL = "https://artworkbackend.adaptable.app/favourites";
+const COMMENTS_URL = "https://artworkbackend.adaptable.app/comments";
 
 function ArtworkDetail() {
   const { id } = useParams();
